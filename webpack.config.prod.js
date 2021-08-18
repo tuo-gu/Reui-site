@@ -14,5 +14,5 @@ module.exports = Object.assign({}, base, {
             amd: 'react-dom',
             root: 'ReactDOM',
         },
-    }
+    },
 })

@@ -9,7 +9,7 @@ import {Layout, Aside, Header, Content} from './lib/layout/layout';
 import IconDemo from './lib/icon/icon.demo';
 
 
-const logo = require('./logo.png');
+const logo = require('./logo.jpg');
 
 ReactDOM.render(
   <Router>

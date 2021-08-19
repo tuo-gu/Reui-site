@@ -41,8 +41,10 @@ body {
       font-size: 14px;
       padding: 10px;
       box-shadow: 0 0 1px rgba(0,0,0,0.8);
+      white-space: nowrap;
     }
     td:last-child{
+      white-space: pre-wrap;
     }
     >thead{
       background-color: #f8f8f8;

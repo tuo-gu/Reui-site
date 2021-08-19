@@ -1,8 +1,13 @@
 function classes(...names: (string | undefined)[]) {
-  return names.filter(Boolean).join(' ');
+  return names.filter(Boolean).join('-');
 }
-
 export default classes;
+
+// function classesAdd(...names: (string | undefined)[]) {
+//   return names.filter(Boolean).join('-');
+// }
+//
+// export default classesAdd;
 
 interface Options {
   extra: string | undefined

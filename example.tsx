@@ -9,10 +9,10 @@ import {Layout, Aside, Header, Content} from './lib/layout/layout';
 import IconDemo from './lib/icon/icon.demo';
 
 
-const logo = require('./logo.jpg');
+const logo = require('./logo.png');
 
 ReactDOM.render(
-  <Router>
+  <Router >
     <Layout className="site-page" >
       <Header className="site-header">
         <div className="logo">
@@ -25,7 +25,7 @@ ReactDOM.render(
           <h2>组件</h2>
           <ul>
             <li>
-              <NavLink to="/icon">Icon</NavLink>
+              <NavLink to="/icon" >Icon</NavLink>
             </li>
             <li>
               <NavLink to="/dialog">对话框</NavLink>
@@ -39,6 +39,7 @@ ReactDOM.render(
           </ul>
         </Aside>
         <Content className="site-main">
+          <Route path="/" component={IconDemo}/>
           <Route path="/icon" component={IconDemo}/>
           <Route path="/button" component={ButtonExample}/>
           <Route path="/dialog" component={DialogExample}/>

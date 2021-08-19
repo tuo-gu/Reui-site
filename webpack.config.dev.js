@@ -7,7 +7,8 @@ module.exports = Object.assign({}, base, {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'example.html'
+            template: 'example.html',
+            title:"RE UI"
         })
     ],
 })

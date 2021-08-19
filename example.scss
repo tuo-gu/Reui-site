@@ -7,6 +7,7 @@ a { text-decoration: none; color: inherit; }
 pre {
   font-family: "Fira Code Medium", Consolas, monospace;
 }
+tr,td{border-style: none;}
 $padding: 16px;
 $main-color:rgb(80,5,223);
 
@@ -22,6 +23,32 @@ body {
   padding-top: 16px;
   overflow-y: auto;
   max-height:calc(100vh - 64px);
+  background-color:#F7F8FA;
+  .card{
+    max-width:860px ;
+    min-width: 430px;
+    margin-bottom: 24px;
+    margin-left:24px;
+    padding: 24px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 12px rgba(0,0,0,0.1);
+  }
+  .propertyDescription{
+    width: 100%;
+    border-spacing:0 ;
+    td{
+      font-size: 14px;
+      padding: 10px;
+      box-shadow: 0 0 1px rgba(0,0,0,0.8);
+    }
+    td:last-child{
+    }
+    >thead{
+      background-color: #f8f8f8;
+      font-weight: bold;
+    }
+  }
 }
 .site-header {
   background: $border-color;
@@ -39,10 +66,12 @@ body {
 }
 .site-aside {
   border-right: 1px solid #EEEEEE;
-  margin-right: 16px;
+  margin-right: 6px;
   h2 {
     padding: $padding;
     font-size: 18px;
+    font-weight: bold;
+
   }
   ul {
     min-width: 12em;

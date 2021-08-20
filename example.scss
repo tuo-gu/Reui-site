@@ -10,7 +10,6 @@ pre {
 tr,td{border-style: none;}
 $padding: 16px;
 $main-color:rgb(80,5,223);
-
 $border-color: #eee;
 body {
   font-size: 16px;
@@ -105,5 +104,10 @@ body {
   display: none;
 }
 .example {
-  padding: 16px 0;
+  padding: 10px 0;
+}
+.codePrint{
+  pre{
+    white-space: pre-wrap;
+  }
 }

@@ -7,6 +7,7 @@ interface Props extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLB
   bgColor?:string
   radius?:true|string
   types?:string
+  border?:string
 }
 const Button:React.FunctionComponent<Props>
   =(
@@ -16,6 +17,7 @@ const Button:React.FunctionComponent<Props>
       bgColor,
       radius,
       types,
+      border,
       ...restProps}
     )=>{
 
@@ -29,7 +31,8 @@ const Button:React.FunctionComponent<Props>
         style={{
             color:color,
             backgroundColor:bgColor,
-            borderRadius:radiusValue
+            borderRadius:radiusValue,
+            border:border
         }}
         >
         {restProps.children}

@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from './button';
 import Tr from '../table/tr';
+import './button.example.scss'
 
 const ButtonExample: React.FunctionComponent = () => {
   const test=()=>{console.log('fn');}
@@ -8,12 +9,32 @@ const ButtonExample: React.FunctionComponent = () => {
     <div>
       <div className={"card"}>
         <span>按钮类型</span>
+        <div className="example-button">
+          <Button color="white"
+                  bgColor='green'
+                  onClick={()=>{test()}}
+                  types="mani"
+          >基础按钮</Button>
 
-        <Button color="blue" className="button"
-                prefixClass="re"
-                radius
-                onClick={()=>{test()}}
-                bgColor='green'>默认按钮</Button>
+          <Button types="foundation" className="test choose" prefixClass="re" >基础按钮</Button>
+          <Button types="inform">信息按钮</Button>
+          <Button types="danger">危险按钮</Button>
+          <Button types="warning">警告按钮</Button>
+
+          <Button color="white"
+                  bgColor="blue"
+          >信息按钮</Button>
+          <Button>默认按钮</Button>
+          <Button color="blue"
+                  bgColor='green'
+                  className="button button2"
+                  prefixClass="re"
+                  radius
+                  onClick={()=>{test()}}
+                  types="test"
+          >圆角按钮</Button>
+        </div>
+
       </div>
 
       <div className="card">

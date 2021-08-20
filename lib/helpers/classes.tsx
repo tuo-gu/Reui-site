@@ -1,13 +1,15 @@
 function classes(...names: (string | undefined)[]) {
-  return names.filter(Boolean).join('-');
+  let [prefix,name,types]=names
+  // return name.filter(Boolean).join('-');
+  prefix===''?prefix='':prefix+='-'
+  types=(types?types:'')
+  if(name){
+    const arr=name.split(' ').filter(Boolean).map(item=>prefix+item)
+   return [...arr,types].filter(Boolean).join(' ')
+ }
+ return types;
 }
 export default classes;
-
-// function classesAdd(...names: (string | undefined)[]) {
-//   return names.filter(Boolean).join('-');
-// }
-//
-// export default classesAdd;
 
 interface Options {
   extra: string | undefined

@@ -7,7 +7,7 @@ import DialogExample from './lib/dialog/dialog.example';
 import DialogExample2 from './lib/dialog2/dialog.example';
 import ButtonExample from './lib/button/button.example';
 import LayoutExample from './lib/layout/layout.example';
-import IconDemo from './lib/icon/icon.demo';
+import IconExample from './lib/icon/icon.example';
 
 const logo = require('./logo.png');
 const firstIn=()=>{
@@ -27,13 +27,13 @@ ReactDOM.render(
           <h2>组件</h2>
           <ul>
             <li >
-              <NavLink to="/icon" isActive={firstIn}>Icon</NavLink>
+              <NavLink to="/icon" isActive={firstIn}>Icon图标</NavLink>
             </li>
             <li>
               <NavLink to="/dialog">对话框</NavLink>
             </li>
             <li>
-              <NavLink to="/dialog2">my对话框</NavLink>
+              <NavLink to="/dialog2">Dialog对话框</NavLink>
             </li>
             <li>
               <NavLink to="/button">按钮</NavLink>
@@ -44,7 +44,7 @@ ReactDOM.render(
           </ul>
         </Aside>
         <Content className="site-main">
-          <Route path="/icon" component={IconDemo}/>
+          <Route path="/icon" component={IconExample}/>
           <Route path="/button" component={ButtonExample}/>
           <Route path="/dialog" component={DialogExample}/>
           <Route path="/dialog2" component={DialogExample2}/>

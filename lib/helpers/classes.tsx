@@ -1,13 +1,13 @@
 function classes(...names: (string | undefined)[]) {
   let [prefix,name,types]=names
   // return name.filter(Boolean).join('-');
-  prefix===''?prefix='':prefix+='-'
-  types=(types?types:'')
+  prefix=(prefix===''?'':prefix)
+  types=(types?'re-'+types:'')
   if(name){
-    const arr=name.split(' ').filter(Boolean).map(item=>prefix+item)
+    const arr=name.split(' ').filter(Boolean).map(item=>prefix+'-'+item)
    return [...arr,types].filter(Boolean).join(' ')
  }
- return types;
+  return [prefix,types].filter(Boolean).join(' ')
 }
 export default classes;
 

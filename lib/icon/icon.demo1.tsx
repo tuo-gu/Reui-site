@@ -1,15 +1,15 @@
 import React from 'react';
 import Icon from './icon';
 
-
-const IconExample1: React.FunctionComponent = () => {
+const IconDemo1: React.FunctionComponent = () => {
   return (
-    <div>
+    <div className={"example-icon"}>
       <Icon name="alipay"/>
       <Icon name="wechat"/>
       <Icon name="qq"/>
+      <Icon name="weibo"/>
     </div>
   );
 };
 
-export default IconExample1;
+export default IconDemo1;

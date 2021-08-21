@@ -8,6 +8,7 @@ const Tr:React.FunctionComponent<Props>=(props)=>{
   return (
   <tr>
     {arr.map(item=>(<td key={item}>{item}</td>))}
+    {props.children}
   </tr>
   )
 }

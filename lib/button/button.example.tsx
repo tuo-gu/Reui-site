@@ -13,10 +13,10 @@ const ButtonExample: React.FunctionComponent = () => {
           <Demo code={require('!!raw-loader!./buttonDemo1').default} />
         </div>
         <div className="example-button">
-          <Button types="foundation" >基础按钮</Button>
+          <Button types="main" >基础按钮</Button>
           <Button types="inform">信息按钮</Button>
           <Button types="danger">危险按钮</Button>
-          <Button types="warning">警告按钮</Button>
+          <Button types="alert">警告按钮</Button>
 
           <Button color="white"
                   bgColor="blue"

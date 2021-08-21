@@ -1,20 +1,29 @@
+@import "../helpers/helper";
 button{
   border-style: none;
   padding:0 1em;
+  &:active{
+    opacity: 0.7;
+  }
 }
-.foundation{
+.re-main{
   background-color: #34a853;
   color: white;
 }
-.inform{
+.re-inform{
   background-color: dodgerblue;
   color: white;
 }
-.danger{
+.re-danger{
   background-color: red;
   color: white;
 }
-.warning{
+.re-alert{
   background-color:coral;
   color: white;
+}
+.re-simple{
+  border: 1px solid $main-color;
+  color: $main-color;
+  background-color: white;
 }

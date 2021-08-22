@@ -11,6 +11,7 @@ interface Props {
   coverClick?:boolean
   closeIcon?:boolean
   header?:string
+  inputText?:boolean
 }
 
 const rui=scopedClassMaker('rui-dialog')
@@ -35,9 +36,15 @@ const Dialog:React.FunctionComponent<Props>=(props)=>{
         </div>}
         {props.header&&
         <header className={rui('header')}>{props.header}</header>}
+        <label>
         <main className={rui('main')}>
           {props.children}
+          {console.log(props.inputText)}
+          {props.inputText &&<div className="div-input">
+            <input type={"text"} name="promptInput" placeholder={"请输入内容："}/>
+          </div>}
         </main>
+        </label>
         {props.buttons &&props.buttons.length>0 &&
         <footer className={rui('footer')}>
           {props.buttons&&props.buttons.map((button,index)=>
@@ -58,6 +65,7 @@ const modal=(content:ReactNode,
              buttons?:Array<ReactElement>,
              afterClose?:()=>void,
              closeIcon?:boolean,
+             inputText?:boolean
             )=>{
   const close=()=>{
     ReactDOM.render(React.cloneElement(component,{visible:false}),div);
@@ -71,6 +79,8 @@ const modal=(content:ReactNode,
       buttons={buttons}
       closeIcon={closeIcon}
       header={header}
+      inputText={inputText}
+
     >{content}</Dialog>
   )
   const div=document.createElement('div')
@@ -99,8 +109,20 @@ const confirm=(content:string,header?:string, yes?:()=>void, no?:()=>void)=>{
   const close= modal(content,header,buttons,no)
 }
 
-const prompt=(content:string,header?:string)=>{
-  modal(content,header)
+const prompt=(content:string,header?:string,yes?:()=>void, no?:()=>void)=>{
+  const onYes=()=>{close();yes &&yes()}
+  const onNo=()=>{close();no&&no()}
+  const inputText=true
+  const buttons=
+    [<button onClick={()=>{onYes()}}>确认</button>,
+      <button onClick={()=>{onNo()}}>取消</button>]
+  const close= modal(
+    content,
+    header,
+    buttons,
+    undefined,
+    undefined,
+    inputText)
 }
 
 export {alert,confirm,modal,prompt}

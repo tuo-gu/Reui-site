@@ -18,11 +18,13 @@ const IconExample = () => {
        <span>(2)自定义颜色</span>
        <IconDemo2/>
      </Demo>
-     <p>使用时，只需要在节点内用即可
-       （name为图标名称，例如：weixin、qq等），如下代码即可显示一个微信图标：</p>
-     <code>
-       {`\< Icon name="wechat"/>`}
-     </code>
+     <div className="site-code">
+       <p>使用时，只需要在节点内用即可
+         （name为图标名称，例如：wechat、qq等），如下代码即可显示一个微信图标：</p>
+       <code>
+         {`\< Icon name="wechat"/>`}
+       </code>
+     </div>
    </div>
   );
 };

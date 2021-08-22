@@ -45,10 +45,11 @@ export default function () {
         <div>
           <h1>警告框</h1>
           <h6>内容展示，点击按钮执行定义的函数</h6>
-          <button onClick={()=>alert('1')}>alert</button>
+          <button onClick={()=>alert('1',"警告框",()=>{console.log('警告框输出')})}>alert</button>
           <br/>
           <br/>
           <button onClick={()=>confirm('用户写入button',
+            '自定义',
             ()=>{console.log('yes')},
             ()=>{console.log('no')}
           )}>confirm</button>
@@ -69,14 +70,18 @@ export default function () {
             <Tr td={"alert,警告框"}>
               <td>
                 <Button types="simple"
-                        onClick={()=>setX(!x)}
+                        onClick={()=>alert(
+                          '你好，这是个警告信息！',
+                           '警告框'
+                          )}
                 >警告框</Button>
               </td>
             </Tr>
             <Tr td={"confirm,确认框"}>
               <td>
                 <Button types="simple"
-                        onClick={()=>setY(!y)}
+                        onClick={()=>confirm('请点击“确认”/“取消”',
+                        '提示')}
                 >确认框</Button>
               </td>
             </Tr>
@@ -96,6 +101,15 @@ export default function () {
             </Tr>
           </tbody>
         </table>
+      </div>
+
+      <div className="card">
+        <div className="site-code">
+          <p>显示关闭按钮</p>
+          <p>自定义header</p>
+          <p>alert关闭按钮触发事件</p>
+
+        </div>
       </div>
     </Fragment>
   )

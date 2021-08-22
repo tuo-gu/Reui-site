@@ -9,6 +9,8 @@ interface Props {
   buttons?:Array<ReactElement>
   onClose:React.MouseEventHandler
   coverClick?:boolean
+  closeIcon?:boolean
+  header?:string
 }
 
 const rui=scopedClassMaker('rui-dialog')
@@ -26,10 +28,13 @@ const Dialog:React.FunctionComponent<Props>=(props)=>{
     <Fragment>
       <div className={rui('mask')} onClick={onClickMask} />
       <div className={rui('')}>
-        <div className={rui('close')} onClick={onClickClose}>
-          <Icon name="close" />
-        </div>
-        <header className={rui('header')}>消息框</header>
+        {props.closeIcon&&
+        <div className={rui('close')}
+             onClick={onClickClose}>
+              <Icon name="close" />
+        </div>}
+        {props.header&&
+        <header className={rui('header')}>{props.header}</header>}
         <main className={rui('main')}>
           {props.children}
         </main>
@@ -44,10 +49,16 @@ const Dialog:React.FunctionComponent<Props>=(props)=>{
   return ReactDOM.createPortal(elementMount,document.body)
 }
 Dialog.defaultProps={
-  coverClick:false
+  coverClick:false,
+  closeIcon:false
 }
 
-const modal=(content:ReactNode,buttons?:Array<ReactElement>,afterClose?:()=>void)=>{
+const modal=(content:ReactNode,
+             header?:string,
+             buttons?:Array<ReactElement>,
+             afterClose?:()=>void,
+             closeIcon?:boolean,
+            )=>{
   const close=()=>{
     ReactDOM.render(React.cloneElement(component,{visible:false}),div);
     ReactDOM.unmountComponentAtNode(div)
@@ -58,6 +69,8 @@ const modal=(content:ReactNode,buttons?:Array<ReactElement>,afterClose?:()=>void
       visible={true}
       onClose={()=>{close();afterClose&&afterClose()}}
       buttons={buttons}
+      closeIcon={closeIcon}
+      header={header}
     >{content}</Dialog>
   )
   const div=document.createElement('div')
@@ -67,19 +80,28 @@ const modal=(content:ReactNode,buttons?:Array<ReactElement>,afterClose?:()=>void
 }
 
 //动态生成组件
-const alert=(content:string)=>{
-  modal(content, undefined,()=>{console.log('afterClose')})
+const alert=(content:string,header:string,fn?:()=>void)=>{
+      modal(content,
+            header,
+            undefined,
+            fn,
+            true,
+            )
 }
 
-const confirm=(content:string, yes?:()=>void, no?:()=>void)=>{
+const confirm=(content:string,header?:string, yes?:()=>void, no?:()=>void)=>{
   const onYes=()=>{close();yes &&yes()}
   const onNo=()=>{close();no&&no()}
   const buttons=
-    [<button onClick={()=>{onYes()}}>yes</button>,
-    <button onClick={()=>{onNo()}}>no</button>]
+    [<button onClick={()=>{onYes()}}>确认</button>,
+    <button onClick={()=>{onNo()}}>取消</button>]
 
-  const close= modal(content,buttons,no)
+  const close= modal(content,header,buttons,no)
 }
 
-export {alert,confirm,modal}
+const prompt=(content:string,header?:string)=>{
+  modal(content,header)
+}
+
+export {alert,confirm,modal,prompt}
 export default Dialog

@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from './button';
-import './button.example.scss'
+import Button from '../button';
+import '../button.example.scss'
 
 const ButtonExample: React.FunctionComponent = () => {
   return (

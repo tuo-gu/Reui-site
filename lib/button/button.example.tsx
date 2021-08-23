@@ -10,7 +10,7 @@ const ButtonExample: React.FunctionComponent = () => {
       <div className="card">
         <div className="example-button">
           <span>按钮类型</span>
-          <Demo code={require('!!raw-loader!./buttonDemo1').default} />
+          <Demo code={require('!!raw-loader!./demoExample/buttonDemo1').default} />
         </div>
         <div className="example-button">
           <Button types="main" >基础按钮</Button>
@@ -26,7 +26,7 @@ const ButtonExample: React.FunctionComponent = () => {
 
         <div className="example-button">
           <span>极简按钮</span>
-          <Demo code={require('!!raw-loader!./buttonDemo2').default} />
+          <Demo code={require('!!raw-loader!./demoExample/buttonDemo2').default} />
         </div>
         <div className="example-button">
           <Button
@@ -43,7 +43,7 @@ const ButtonExample: React.FunctionComponent = () => {
 
         <div className="example-button">
           <span>圆角按钮</span>
-          <Demo code={require('!!raw-loader!./buttonDemo3').default} />
+          <Demo code={require('!!raw-loader!./demoExample/buttonDemo3').default} />
         </div>
         <div className="example-button">
           <Button color="white"

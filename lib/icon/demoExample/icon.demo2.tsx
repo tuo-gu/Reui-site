@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon from './icon';
+import Icon from '../icon';
 
 const IconDemo2: React.FunctionComponent = () => {
   return (

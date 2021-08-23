@@ -25,9 +25,11 @@ const Demo: React.FunctionComponent<Props> = (props) => {
   );
   return (
     <div>
+      {props.children&&
       <div className="example">
         {props.children}
       </div>
+      }
       <div className={"codePrint"}>
         <Button  onClick={() => setCodeVisible(!codeVisible)}
                  border={`1px solid ${$color}`}

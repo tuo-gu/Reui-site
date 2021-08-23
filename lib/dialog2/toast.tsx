@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './toast.scss'
 
 interface Props {
-  visible:boolean
+  visible?:boolean
   text:string
   time?:number
 }
@@ -15,6 +15,9 @@ const Toast:React.FunctionComponent<Props>=(props)=>{
       </div>
     )
   return ReactDOM.createPortal(elementMount,document.body)
+}
+Toast.defaultProps={
+  visible:true
 }
 
 const toast=(text:string,time?:number)=>{

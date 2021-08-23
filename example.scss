@@ -111,9 +111,27 @@ body {
     white-space: pre-wrap;
   }
 }
+.prism-code{//查看代码展示框样式
+  position: absolute;
+  padding: 1.5em;
+  border-radius:1em ;
+}
 .site-code{//代码展示样式
+  h4{font-weight: bold;
+    padding: 1em 0;
+  }
   p{
     padding: 1em 0;
+    >span{
+      &.code{
+        background-color:lightblue;
+        color: #333;
+        padding: 0 0.5em;
+      }
+      &.blue{
+        color:dodgerblue;
+      }
+    }
   }
   pre{
     font-family: "Fira Code", monospace;
@@ -121,5 +139,7 @@ body {
     padding: 16px;
     background: #eee;
     display: block;
+    white-space: pre-wrap;
+    margin: 10px;
   }
 }

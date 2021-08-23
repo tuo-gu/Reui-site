@@ -1,20 +1,20 @@
-import IconDemo1 from './icon.demo1';
+import IconDemo1 from './demoExample/icon.demo1';
 import React from 'react';
 import Demo from '../../demo';
 import '../../example.scss'
 import './icon.example.scss'
-import IconDemo2 from './icon.demo2';
+import IconDemo2 from './demoExample/icon.demo2';
 
 const IconExample = () => {
   return (
    <div className="card">
      <p>默认提供了开发常用的svg图标，如下：</p>
-     <Demo code={require('!!raw-loader!./icon.demo1.tsx').default}>
+     <Demo code={require('!!raw-loader!./demoExample/icon.demo1.tsx').default}>
        <span>(1)用法示例</span>
        <IconDemo1/>
      </Demo>
 
-     <Demo code={require('!!raw-loader!./icon.demo2.tsx').default}>
+     <Demo code={require('!!raw-loader!./demoExample/icon.demo2.tsx').default}>
        <span>(2)自定义颜色</span>
        <IconDemo2/>
      </Demo>

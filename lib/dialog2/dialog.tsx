@@ -1,4 +1,4 @@
-import React, {Fragment, ReactElement, ReactNode} from 'react';
+import React, {ChangeEvent, Fragment, ReactElement, ReactNode} from 'react';
 import './dialog.scss'
 import Icon from '../icon/icon';
 import ReactDOM from 'react-dom';
@@ -15,6 +15,11 @@ interface Props {
 }
 
 const rui=scopedClassMaker('rui-dialog')
+let promptInputValue:string
+const promptInput =(e: ChangeEvent<HTMLInputElement>)=>{
+
+  return promptInputValue= e.target.value ; // 获取到输入框的值
+}
 
 const Dialog:React.FunctionComponent<Props>=(props)=>{
   const onClickClose:React.MouseEventHandler=(e)=>{
@@ -25,6 +30,7 @@ const Dialog:React.FunctionComponent<Props>=(props)=>{
       props.onClose(e)
     }
   }
+
   const elementMount=props.visible &&
     <Fragment>
       <div className={rui('mask')} onClick={onClickMask} />
@@ -39,9 +45,10 @@ const Dialog:React.FunctionComponent<Props>=(props)=>{
         <label>
         <main className={rui('main')}>
           {props.children}
-          {console.log(props.inputText)}
           {props.inputText &&<div className="div-input">
-            <input type={"text"} name="promptInput" placeholder={"请输入内容："}/>
+            <input type={"text"} name="promptInput"
+              onChange={promptInput}
+            />
           </div>}
         </main>
         </label>
@@ -90,7 +97,7 @@ const modal=(content:ReactNode,
 }
 
 //动态生成组件
-const alert=(content:string,header:string,fn?:()=>void)=>{
+const alert=(content:string,header?:string,fn?:()=>void)=>{
       modal(content,
             header,
             undefined,
@@ -99,8 +106,9 @@ const alert=(content:string,header:string,fn?:()=>void)=>{
             )
 }
 
+
 const confirm=(content:string,header?:string, yes?:()=>void, no?:()=>void)=>{
-  const onYes=()=>{close();yes &&yes()}
+  const onYes=()=>{yes &&yes();close()}
   const onNo=()=>{close();no&&no()}
   const buttons=
     [<button onClick={()=>{onYes()}}>确认</button>,
@@ -109,9 +117,11 @@ const confirm=(content:string,header?:string, yes?:()=>void, no?:()=>void)=>{
   const close= modal(content,header,buttons,no)
 }
 
-const prompt=(content:string,header?:string,yes?:()=>void, no?:()=>void)=>{
-  const onYes=()=>{close();yes &&yes()}
-  const onNo=()=>{close();no&&no()}
+const prompt=(content:string,header?:string,yes?:(a?:string)=>void, no?:()=>void )=>{
+  const inputValue=()=>promptInputValue
+  const onYes=()=>{close();yes&&yes(inputValue());}
+  const onNo=()=>{no&&no();close();}
+
   const inputText=true
   const buttons=
     [<button onClick={()=>{onYes()}}>确认</button>,

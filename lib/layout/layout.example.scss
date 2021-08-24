@@ -5,7 +5,7 @@
   color: white;
 }
 .y {
-  background: lighten(#4285f4, 5%);
+  background: lighten(#4285f4, 15%);
   margin: 4px 0;
   color: white;
 }
@@ -15,6 +15,24 @@
   margin: 4px 0;
   color: white;
 }
-.z + .y, .y + .z, .z + .gu-layout {
-  margin-left: 8px;
+
+.layout-example{
+  width: 400px;
+  height: 350px;
+  text-align: center;
+  display: flex;
+  flex-direction:row;
+  >.re-layout-hasAside{
+    flex-direction: row;
+    .z + .y, .y + .z, .z + .re-layout {
+      margin-left: 8px;
+    }
+  }
+  .z + .re-layout {
+    margin-left: 8px;
+  }
+  >.re-layout{
+    flex-grow: 1;
+  }
 }
+

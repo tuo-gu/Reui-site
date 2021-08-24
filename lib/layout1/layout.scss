@@ -1,0 +1,25 @@
+.re-layout{
+  height: 30vh;
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  &-content{
+    flex-grow: 1;
+  }
+  & &{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+  }
+  &-hasAside{
+    flex-direction: row;
+    .re-layout{
+      flex-direction: column;
+    }
+  }
+  & & &{
+    display: flex;
+    flex-direction: column;
+  }
+}

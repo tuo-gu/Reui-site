@@ -19,7 +19,7 @@ const IconExample = () => {
        <IconDemo2/>
      </Demo>
      <div className="site-code">
-       <p>使用时，只需要在节点内用即可
+       <p>使用时，只需要使用Icon标签即可
          （name为图标名称，例如：wechat、qq等），如下代码即可显示一个微信图标：</p>
        <pre>
          {`\< Icon name="wechat"/>`}

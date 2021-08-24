@@ -4,10 +4,11 @@ import './example.scss';
 import {HashRouter as Router, Route, NavLink} from 'react-router-dom';
 import {Layout, Aside, Header, Content} from './lib/layout/layout';
 import DialogExample from './lib/dialog/dialog.example';
-import DialogExample2 from './lib/dialog2/dialog.example';
 import ButtonExample from './lib/button/button.example';
-import LayoutExample from './lib/layout/layout.example';
 import IconExample from './lib/icon/icon.example';
+import LayoutExample from './lib/layout/layout.example';
+import GalleryExample from './lib/gallery/gallery.examle';
+
 
 const logo = require('./logo.png');
 const firstIn=()=>{
@@ -30,10 +31,7 @@ ReactDOM.render(
               <NavLink to="/icon" isActive={firstIn}>Icon图标</NavLink>
             </li>
             <li>
-              <NavLink to="/dialog">对话框</NavLink>
-            </li>
-            <li>
-              <NavLink to="/dialog2">Dialog对话框</NavLink>
+              <NavLink to="/dialog">Dialog对话框</NavLink>
             </li>
             <li>
               <NavLink to="/button">按钮</NavLink>
@@ -41,14 +39,17 @@ ReactDOM.render(
             <li>
               <NavLink to="/layout">布局</NavLink>
             </li>
+            <li>
+              <NavLink to="/gallery">轮播图</NavLink>
+            </li>
           </ul>
         </Aside>
         <Content className="site-main">
           <Route path="/icon" component={IconExample}/>
           <Route path="/button" component={ButtonExample}/>
           <Route path="/dialog" component={DialogExample}/>
-          <Route path="/dialog2" component={DialogExample2}/>
           <Route path="/layout" component={LayoutExample}/>
+          <Route path="/gallery" component={GalleryExample}/>
         </Content>
       </Layout>
     </Layout>

@@ -42,7 +42,6 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
     })
     //设置一个状态代表需求状态是循环，改变handle效果
     if(props.loop){setIsLoop(true)}
-    console.log(len);
   }
   useEffect(()=>{
     if(props.loop){
@@ -50,7 +49,6 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
     }else {
       setTransition()
     }
-    console.log(active)
     liSelected()
   },[active])
   const setLoop=()=>{
@@ -77,7 +75,6 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
 
   }
   const setTransition=()=>{
-    console.log('loopNo');
     if(Math.abs(saveActive-active)>1){
       container.current!.style.transitionProperty="none"
     }else {

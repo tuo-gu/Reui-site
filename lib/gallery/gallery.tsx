@@ -1,25 +1,48 @@
 import React, {useEffect, useRef, useState} from 'react';
-import './gallery.scss'
+import './gallery.scss';
 
 interface Props {
-  //width移动的距离
-  width?:number
+  //shift移动的距离
+  shift?:number
   viewWidth?:number
   loop?:boolean
+  dots:number
+  autoPlay?:boolean
+  prev?:number
 }
 const Gallery:React.FunctionComponent<Props>=(props)=>{
   const [active,setActive]=useState(1)
   const [saveActive,setSaveActive]=useState()
   const [len,setLent]=useState()
-  // const [status,setStatus]=useState(true)
+  const [timeInterval,setTimeInterval]=useState(0)
+  const [isLoop,setIsLoop]=useState(false)
   const view=useRef<HTMLDivElement>(null)
   const container=useRef<HTMLUListElement>(null)
   const dotsUl=useRef<HTMLUListElement>(null)
-  useEffect(()=>{
-    init()
-  },[])
-  const init=()=>{
+  const main=useRef<HTMLDivElement>(null)
+  useEffect(()=>{if (props.autoPlay){autoPlay()}},[timeInterval])
+  useEffect(()=>{init();},[])
+  const init=()=>{//页面初始化
+    if(props.dots) {//生成dots
+      for (let i = 0; i < props.dots;i++) {
+        const li=document.createElement("li")
+        li.setAttribute('name',`${i}`)
+        dotsUl.current!.appendChild(li)
+      }
+    }
+    //获取re-slide-group子元素个数
     setLent(container.current!.children.length)
+    //事件委托，点击下标实现切换
+    dotsUl.current!.addEventListener('click', function (e) {
+      e.stopPropagation()
+      if(e.target&&e.target.nodeName==="LI"){
+        //value从0开始，需要加1
+        setActive(parseInt(e.target.attributes.name.value)+1)
+      }
+    })
+    //设置一个状态代表需求状态是循环，改变handle效果
+    if(props.loop){setIsLoop(true)}
+    console.log(len);
   }
   useEffect(()=>{
     if(props.loop){
@@ -27,29 +50,31 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
     }else {
       setTransition()
     }
+    console.log(active)
+    liSelected()
   },[active])
   const setLoop=()=>{
-    console.log(active);
     // @ts-ignore
-    const distance=(0-active)*props.width
+    const distance=props.prev?(0-active)*props.shift+props.prev: (0-active)*props.shift
     container.current!.style.transform=`translate(${distance}px,0)`;
 
     if(saveActive===1&&active===0){
-      timer(len-2)
+      offTransition(len-2)
     }
     if(saveActive===len-2&&active===len-1){
-      timer(1)
+      offTransition(1)
     }
 
   }
-  const timer=(a:number)=>{
+  const offTransition=(a:number)=>{
     setTimeout(()=>{
       container.current!.style.transitionProperty="none"
       setActive(a)
-    },500)
+    },490)//稍小于css设置的动画过渡事件
     setTimeout(()=>{
       container.current!.style.transitionProperty="all"
-    },600)
+    },800)
+
   }
   const setTransition=()=>{
     console.log('loopNo');
@@ -58,26 +83,41 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
     }else {
       container.current!.style.transitionProperty="all"
     }
-    // console.log(container);
     // @ts-ignore
-    const distance=(0-active)*props.width
+    const distance=props.prev?(0-active)*props.shift+props.prev: (0-active)*props.shift
     container.current!.style.transform=`translate(${distance}px,0)`;
-
   }
-
 
   const handlePrev = () => {
     setSaveActive(active)
-    setActive(active === 0 ? len-2 : active - 1)
+    isLoop? setActive(active === 0 ? len-2 : active - 1):
+    setActive(active === 1 ? len-2 : active - 1)
   }
 
   const handleNext = () => {
     setSaveActive(active)
-    setActive(active === len-1 ? 1 : active + 1);
+    isLoop?setActive(active === len-1 ? 1 : active + 1):
+    setActive(active === len-2 ? 1 : active + 1)
+  }
+
+  const autoPlay=(time=3000)=>{
+    setTimeout(()=>{ timeInterval!==0&&handleNext();//消除第一次渲染马上出发
+      setTimeout(()=>{setTimeInterval(timeInterval+1)},time)
+    }, 0);
+  }
+  const liSelected=()=>{
+    if(props.dots) {//生成dots
+      for (let i = 0; i < props.dots;i++) {
+          const li=document.createElement("li")
+          active-1===i?li.setAttribute('class','selected'):null
+          li.setAttribute('name',`${i}`)
+          dotsUl.current!.childNodes[i].replaceWith(li)
+      }
+    }
   }
 
   return (
-    <div className="re-slide-main" >
+    <div className="re-slide-main" ref={main}>
       <div className="re-container" ref={view}
            style={{width:props.viewWidth}}
             >
@@ -91,9 +131,6 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
       </div>
 
       <ul className="re-dots" ref={dotsUl}>
-        <li/>
-        <li/>
-        <li/>
       </ul>
 
       <div className="slide-move-left" onClick={()=>handlePrev()}>《</div>

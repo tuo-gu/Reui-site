@@ -50,10 +50,11 @@
     margin-left: 4px;
     width: 10px;
     height: 10px;
-    background-color: #000;
+    background-color: #eee;
     border-radius: 50%;
+    cursor: pointer;
     &.selected{
-      background-color: pink;
+      background-color: dodgerblue;
     }
   }
 }

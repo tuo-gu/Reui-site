@@ -6,7 +6,7 @@ interface Props {
   shift?:number
   viewWidth?:number
   loop?:boolean
-  dots:number
+  dots?:number
   autoPlay?:boolean
   prev?:number
 }
@@ -46,7 +46,8 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
     //设置一个状态代表需求状态是循环，改变handle切换效果
     if(props.loop){setIsLoop(true)}
 
-    const mouseEnter=(e:MouseEvent)=> {
+    //监听鼠标移入停止播放 /绑定监听鼠标移出继续播放
+    slideMain.current!.addEventListener('mouseenter',(e:MouseEvent)=> {
       if(e.target&&e.target.nodeName==='DIV'){
         setAutoPlayState(false)
         slideMain.current!.addEventListener('mouseleave',function () {
@@ -54,9 +55,7 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
           setTimeInterval(timeInterval+1)
         })
       }
-    }
-    //监听鼠标移入停止播放 /绑定监听鼠标移出继续播放
-    slideMain.current!.addEventListener('mouseenter',mouseEnter)
+    })
   }
 
   useEffect(()=>{
@@ -113,8 +112,7 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
     setActive(active === len-2 ? 1 : active + 1)
   }
   const autoPlay=(time=3000)=>{
-    if(go){
-      console.log('?');
+    if(go){//节流
       setGo(false)
       timeInterval!==0&&handleNext();//消除第一次渲染马上切换
       setTimeout(

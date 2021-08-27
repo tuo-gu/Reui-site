@@ -13,33 +13,7 @@
   flex-direction: row;
   transition: all 0.5s;
 }
-.re-slide-item{
-  width: 190px;
-  height: 200px;
-  color: white;
 
-  &:nth-child(1){
-    background:green;
-  }
-  &:nth-child(2){
-    background:red;
-  }
-  &:nth-child(3){
-    background-color:blue;
-  }
-  &:nth-child(4){
-    background-color:green;
-  }
-  &:nth-child(5){
-    background-color:red;
-  }
-  &.selected{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-  }
-}
 .re-dots{
     position: absolute;
     left: 50%;
@@ -66,8 +40,11 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  color: white;
+  opacity: 0.5;
   &:hover{
-    background-color: rgba(0,0,0,0.1)
+    background-color: rgba(255,255,255,0.6);
+    color:black;
   }
 }
 .slide-move-left{

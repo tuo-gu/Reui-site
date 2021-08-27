@@ -6,14 +6,8 @@ import {toast} from './toast';
 import Demo from '../../demo';
 
 export default function () {
-  // const [x,setX]=useState(false)
-  // const [y,setY]=useState(false)
   return(
     <Fragment>
-      {/*<div className={"card"}>*/}
-      {/*  <Dialog visible={x} onClose={()=>{setX(false)}}/>*/}
-      {/*  <Dialog visible={y} onClose={()=>{setY(false)}}/>*/}
-      {/*</div>*/}
 
       <div className="card">
         <table className={"propertyDescription"}>

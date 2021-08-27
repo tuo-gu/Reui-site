@@ -3,12 +3,13 @@ import './gallery.scss';
 
 interface Props {
   //shift移动的距离
-  shift?:number
+  shift:number
   viewWidth?:number
   loop?:boolean
   dots?:number
   autoPlay?:boolean
   prev?:number
+  time?:number
 }
 const Gallery:React.FunctionComponent<Props>=(props)=>{
   const [active,setActive]=useState(1)
@@ -18,12 +19,13 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
   const [isLoop,setIsLoop]=useState(false)
   const [autoPlayState,setAutoPlayState]=useState(true)
   const [go,setGo]=useState(true)
+  const [itemWidth,setItemWidth]=useState()
 
   const slideView=useRef<HTMLDivElement>(null)
   const slideContainer=useRef<HTMLUListElement>(null)
   const dotsUl=useRef<HTMLUListElement>(null)
   const slideMain=useRef<HTMLDivElement>(null)
-  useEffect(()=>{if (props.autoPlay){autoPlayState&& autoPlay()}},[timeInterval])
+  useEffect(()=>{if (props.autoPlay){autoPlayState&& autoPlay(props.time)}},[timeInterval])
   useEffect(()=>{init();},[])
   const init=()=>{//页面初始化
     if(props.dots) {//生成dots
@@ -35,6 +37,8 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
     }
     //获取re-slide-group子元素个数
     setLent(slideContainer.current!.children.length)
+    //获取item子元素宽度
+    setItemWidth(slideContainer.current!.children[0].clientWidth);
     //事件委托，点击下标实现切换
     dotsUl.current!.addEventListener('click', function (e) {
       e.stopPropagation()
@@ -68,7 +72,8 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
   },[active])
   const setLoop=()=>{
     // @ts-ignore
-    const distance=props.prev?(0-active)*props.shift+props.prev: (0-active)*props.shift
+    // const distance=props.prev?(0-active)*props.shift+props.prev: (0-active)*props.shift
+    const distance=props.prev?(0-active)*itemWidth+props.prev: (0-active)*itemWidth
     slideContainer.current!.style.transform=`translate(${distance}px,0)`;
 
     if(saveActive===1&&active===0){
@@ -96,7 +101,8 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
       slideContainer.current!.style.transitionProperty="all"
     }
     // @ts-ignore
-    const distance=props.prev?(0-active)*props.shift+props.prev: (0-active)*props.shift
+    // const distance=props.prev?(0-active)*props.shift+props.prev: (0-active)*props.shift
+    const distance=props.prev?(0-active)*itemWidth+props.prev: (0-active)*itemWidth
     slideContainer.current!.style.transform=`translate(${distance}px,0)`;
   }
 
@@ -145,7 +151,6 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
 
       <ul className="re-dots" ref={dotsUl}>
       </ul>
-
       <div className="slide-move-left" onClick={()=>handlePrev()}>《</div>
       <div className="slide-move-right" onClick={()=>handleNext()}>》</div>
     </div>

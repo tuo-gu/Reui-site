@@ -7,14 +7,14 @@ export default function () {
   return(
     <Fragment>
       <div className="card" >
-        <Gallery shift={200} viewWidth={220}  dots={3} prev={10} autoPlay>
+        <Gallery viewWidth={220}  dots={3} prev={10} autoPlay loop >
           <li className="re-slide-item">3</li>
           <li className="re-slide-item">1</li>
           <li className="re-slide-item">2</li>
           <li className="re-slide-item">3</li>
           <li className="re-slide-item">1</li>
         </Gallery>
-        <Gallery shift={200} viewWidth={220}  dots={3} prev={10} autoPlay loop>
+        <Gallery viewWidth={220}  dots={3} prev={10} autoPlay >
           <li className="re-slide-item">3</li>
           <li className="re-slide-item">1</li>
           <li className="re-slide-item">2</li>
@@ -30,14 +30,13 @@ export default function () {
 import Gallery from './gallery';`}
           </pre>
           <h4>基础用法:</h4>
-          <p><span className={"code"}>{`< Gallery>`}</span> 将需要轮播的内容放在
-            <span className={"code"}>{`< Gallery>`}</span> 标签内。</p>
-          <p><span className={"code"}>shift</span>用于计算位移，应设置为内容子元素的宽度，轮播时候的转换根据此进行transform计算，
-            为了实现切换效果，最好与子元素宽度保持一致</p>
-          <p><span className={"code"}>viewWidth</span>属性，设置组件的宽度，</p>
+          <p>将需要轮播的内容放在
+            <span className={"code"}>{`Gallery`}</span> 标签内。</p>
+          <p><span className={"code"}>viewWidth</span>属性，设置组件的宽度，
+            应与内容宽度等宽，超出部分会隐藏</p>
           <pre>
 {`//tsx
-\< Gallery shift={200} viewWidth={200}>
+\< Gallery  viewWidth={200}>
     <li className="item">0</li>
     <li className="item">1</li>
     <li className="item">2</li>
@@ -52,7 +51,7 @@ import Gallery from './gallery';`}
 }
 `}
           </pre>
-          <Gallery shift={200} viewWidth={200} >
+          <Gallery viewWidth={200} >
             <li className="re-slide-item">3</li>
             <li className="re-slide-item">1</li>
             <li className="re-slide-item">2</li>
@@ -69,18 +68,27 @@ import Gallery from './gallery';`}
           <p><span className={"code"}>autoPlay</span> 属性，实现自动轮播</p>
           <pre>
 {`//tsx
-\< Gallery shift={200} viewWidth={200} loop autoPlay>
+\< Gallery viewWidth={200} loop autoPlay >
 ...略
 </Gallery>
 
 `}
           </pre>
-          <Gallery shift={200} viewWidth={200}  dots={2} autoPlay loop>
+          <Gallery viewWidth={200}  dots={2} autoPlay loop >
             <li className="re-slide-item" style={{backgroundColor:"blue"}}>2</li>
             <li className="re-slide-item">1</li>
             <li className="re-slide-item">2</li>
             <li className="re-slide-item" style={{backgroundColor:"red"}}>1</li>
           </Gallery>
+          <p><span className={"code"}>time</span> 属性，设置轮播时间,默认值3000毫秒</p>
+          <pre>
+{`//tsx
+\< Gallery viewWidth={200} loop autoPlay time={5000}>
+...略
+</Gallery>
+
+`}
+          </pre>
         </div>
       </div>
       <div className="card">

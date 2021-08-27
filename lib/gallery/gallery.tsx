@@ -2,8 +2,6 @@ import React, {useEffect, useRef, useState} from 'react';
 import './gallery.scss';
 
 interface Props {
-  //shift移动的距离
-  shift:number
   viewWidth?:number
   loop?:boolean
   dots?:number
@@ -19,7 +17,6 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
   const [isLoop,setIsLoop]=useState(false)
   const [autoPlayState,setAutoPlayState]=useState(true)
   const [go,setGo]=useState(true)
-  const [itemWidth,setItemWidth]=useState()
 
   const slideView=useRef<HTMLDivElement>(null)
   const slideContainer=useRef<HTMLUListElement>(null)
@@ -37,8 +34,9 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
     }
     //获取re-slide-group子元素个数
     setLent(slideContainer.current!.children.length)
-    //获取item子元素宽度
-    setItemWidth(slideContainer.current!.children[0].clientWidth);
+    // //获取item子元素宽度(废弃！！！)初始化时候拿得到，但useState调用不到，直接在用到的地方写而不是调用useState
+    // setItemWidth(slideContainer.current!.children[0].clientWidth);
+
     //事件委托，点击下标实现切换
     dotsUl.current!.addEventListener('click', function (e) {
       e.stopPropagation()
@@ -71,9 +69,8 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
     liSelected()
   },[active])
   const setLoop=()=>{
-    // @ts-ignore
-    // const distance=props.prev?(0-active)*props.shift+props.prev: (0-active)*props.shift
-    const distance=props.prev?(0-active)*itemWidth+props.prev: (0-active)*itemWidth
+    const distance=props.prev?(0-active)*slideContainer.current!.children[0].clientWidth+props.prev:
+      (0-active)*slideContainer.current!.children[0].clientWidth
     slideContainer.current!.style.transform=`translate(${distance}px,0)`;
 
     if(saveActive===1&&active===0){
@@ -100,9 +97,8 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
     }else {
       slideContainer.current!.style.transitionProperty="all"
     }
-    // @ts-ignore
-    // const distance=props.prev?(0-active)*props.shift+props.prev: (0-active)*props.shift
-    const distance=props.prev?(0-active)*itemWidth+props.prev: (0-active)*itemWidth
+    const distance=props.prev?(0-active)*slideContainer.current!.children[0].clientWidth+props.prev:
+      (0-active)*slideContainer.current!.children[0].clientWidth
     slideContainer.current!.style.transform=`translate(${distance}px,0)`;
   }
 
@@ -118,6 +114,7 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
     setActive(active === len-2 ? 1 : active + 1)
   }
   const autoPlay=(time=3000)=>{
+    props.prev&&time<800?time=800:time
     if(go){//节流
       setGo(false)
       timeInterval!==0&&handleNext();//消除第一次渲染马上切换

@@ -8,7 +8,7 @@ import ButtonExample from './lib/button/button.example';
 import IconExample from './lib/icon/icon.example';
 import LayoutExample from './lib/layout/layout.example';
 import GalleryExample from './lib/gallery/gallery.examle';
-import MaskExample from './lib/mask/mask'
+import MaskExample from './lib/mask/mask.example'
 
 
 const logo = require('./logo.png');

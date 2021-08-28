@@ -6,12 +6,12 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%,-50%);
-  z-index: 2;
+  z-index: 999;
   border-radius: 16px;
   &-mask{
     position: fixed;top: 0; left: 0; width: 100%; height: 100%;
     background:fade_out(black,0.5);
-    z-index: 1;
+    z-index: 998;
   }
   &-header{
     font-size: 22px;

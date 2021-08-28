@@ -132,7 +132,12 @@ body {
         color:dodgerblue;
       }
     }
+    &.note{
+      color:#999;
+
+    }
   }
+
   pre{
     font-family: "Fira Code", monospace;
     font-size: 14px;
@@ -141,5 +146,6 @@ body {
     display: block;
     white-space: pre-wrap;
     margin: 10px;
+    color: #4285f4;
   }
 }

@@ -22,3 +22,14 @@
     background-color:red;
   }
 }
+.example-swipe{
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+.example-swipe-item{
+  >img{
+    width: 800px;
+    height: 100%;
+  }
+}

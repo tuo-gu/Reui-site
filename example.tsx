@@ -8,6 +8,7 @@ import ButtonExample from './lib/button/button.example';
 import IconExample from './lib/icon/icon.example';
 import LayoutExample from './lib/layout/layout.example';
 import GalleryExample from './lib/gallery/gallery.examle';
+import MaskExample from './lib/mask/mask'
 
 
 const logo = require('./logo.png');
@@ -42,6 +43,9 @@ ReactDOM.render(
             <li>
               <NavLink to="/gallery">轮播图</NavLink>
             </li>
+            <li>
+              <NavLink to="/mask">遮罩层</NavLink>
+            </li>
           </ul>
         </Aside>
         <Content className="site-main">
@@ -50,6 +54,7 @@ ReactDOM.render(
           <Route path="/dialog" component={DialogExample}/>
           <Route path="/layout" component={LayoutExample}/>
           <Route path="/gallery" component={GalleryExample}/>
+          <Route path="/mask" component={MaskExample}/>
         </Content>
       </Layout>
     </Layout>

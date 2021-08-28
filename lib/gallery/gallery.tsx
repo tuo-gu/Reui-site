@@ -36,7 +36,7 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
     setLent(slideContainer.current!.children.length)
     // //获取item子元素宽度(废弃！！！)初始化时候拿得到，但useState调用不到，直接在用到的地方写而不是调用useState
     // setItemWidth(slideContainer.current!.children[0].clientWidth);
-
+    slideView.current!.style.height=slideContainer.current!.children[0].offsetHeight
     //事件委托，点击下标实现切换
     dotsUl.current!.addEventListener('click', function (e) {
       e.stopPropagation()
@@ -49,7 +49,7 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
     if(props.loop){setIsLoop(true)}
 
     //监听鼠标移入停止播放 /绑定监听鼠标移出继续播放
-    slideMain.current!.addEventListener('mouseenter',(e:MouseEvent)=> {
+    const mainListen=(e:MouseEvent)=> {
       if(e.target&&e.target.nodeName==='DIV'){
         setAutoPlayState(false)
         slideMain.current!.addEventListener('mouseleave',function () {
@@ -57,7 +57,11 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
           setTimeInterval(timeInterval+1)
         })
       }
-    })
+    }
+    slideMain.current!.addEventListener('mouseenter',mainListen)
+    return ()=>{
+      slideMain.current!.removeEventListener('mouseenter',mainListen)
+    }
   }
 
   useEffect(()=>{
@@ -69,8 +73,8 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
     liSelected()
   },[active])
   const setLoop=()=>{
-    const distance=props.prev?(0-active)*slideContainer.current!.children[0].clientWidth+props.prev:
-      (0-active)*slideContainer.current!.children[0].clientWidth
+    const distance=props.prev?(0-active)*slideContainer.current!.children[0].offsetWidth +props.prev:
+      (0-active)*slideContainer.current!.children[0].offsetWidth
     slideContainer.current!.style.transform=`translate(${distance}px,0)`;
 
     if(saveActive===1&&active===0){
@@ -97,8 +101,8 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
     }else {
       slideContainer.current!.style.transitionProperty="all"
     }
-    const distance=props.prev?(0-active)*slideContainer.current!.children[0].clientWidth+props.prev:
-      (0-active)*slideContainer.current!.children[0].clientWidth
+    const distance=props.prev?(0-active)*slideContainer.current!.children[0].offsetWidth+props.prev:
+      (0-active)*slideContainer.current!.children[0].offsetWidth
     slideContainer.current!.style.transform=`translate(${distance}px,0)`;
   }
 
@@ -117,6 +121,9 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
     props.prev&&time<800?time=800:time
     if(go){//节流
       setGo(false)
+      timeInterval===0&&setTimeout(()=>{//解决首次加载鼠标马上进入导致播放完全停止
+        setAutoPlayState(true)
+      },time)
       timeInterval!==0&&handleNext();//消除第一次渲染马上切换
       setTimeout(
         ()=>{
@@ -130,7 +137,8 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
     if(props.dots) {//生成dots
       for (let i = 0; i < props.dots;i++) {
           const li=document.createElement("li")
-          active-1===i?li.setAttribute('class','selected'):null
+          active-1===i||(active===len-1&&i===0)||(active===0&&i===props.dots-1)?
+          li.setAttribute('class','selected'):null
           li.setAttribute('name',`${i}`)
           dotsUl.current!.childNodes[i].replaceWith(li)
       }
@@ -148,8 +156,8 @@ const Gallery:React.FunctionComponent<Props>=(props)=>{
 
       <ul className="re-dots" ref={dotsUl}>
       </ul>
-      <div className="slide-move-left" onClick={()=>handlePrev()}>《</div>
-      <div className="slide-move-right" onClick={()=>handleNext()}>》</div>
+      <div className="slide-move-left" onClick={()=>handlePrev()}><span>《</span></div>
+      <div className="slide-move-right" onClick={()=>handleNext()}><span> 》</span></div>
     </div>
   )
 }
